@@ -1,0 +1,24 @@
+#include <stdio.h>
+#include <ctype.h>
+#include <string.h>
+
+int main()
+{
+  char s[500], t[7] = "tatung";
+  int num[7] = {0};
+  while (scanf("%s", s) != EOF) {
+    for(int i=0; i<strlen(s); i++) s[i] = tolower(s[i]);
+    
+    int x = 0;
+    for(unsigned i=0,j=0; i<strlen(s); i++){
+    	if(s[i] == t[j]){
+    		num[x] = i;
+    		x++,j++;
+    	} 
+    }
+    
+    if(x != 6) printf("-1\n");
+    else printf("%d\n",num[5]-num[0]+1);
+    
+  }
+} 
