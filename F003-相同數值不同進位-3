@@ -1,0 +1,31 @@
+#include <stdio.h>
+
+int main()
+{
+	unsigned long long n,m,k;
+  while(scanf("%llu %llu %llu\n",&n,&m,&k) != EOF){
+
+  	int num[100000] = {0};
+    int sum = 0, i = 0;
+    
+    while(m){
+    	num[i++] = m%10;
+    	m /= 10;
+    }
+    
+    for(i-1; i>=0; i--)
+    	sum = sum*n + num[i];
+    	
+    i = 0;
+	  while(sum){
+		  num[i++] = sum % k;
+		  sum /= k;
+	  }
+	  
+	  for(i--; i>=0; i--)
+	    printf("%d",num[i]);
+	  
+	  printf("\n");
+	  
+  }
+}
