@@ -1,0 +1,29 @@
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+	char str[102];
+	int sum[102] = {0};
+  while(scanf("%s",str)!=EOF){
+  	int n = strlen(str);
+  	for(int i=101; i>=0,n>0; i--,n--){
+  		int ov = 0;
+  		sum[i] += (str[n-1]-'0');
+  		while(sum[i-ov]>=10){
+  			sum[i-1-ov]++;
+  			sum[i-ov++] -= 10;
+  		}
+  	}
+  }
+  int x = 1;
+  for(int i=0; i<=101; i++){
+  	if(sum[i] && x){
+  		printf("%d",sum[i]);
+  		x--;
+  	}else if(sum[i]>=0 && !x)
+  	  printf("%d",sum[i]);
+  }
+  printf("\n");
+}
+
