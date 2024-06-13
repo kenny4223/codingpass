@@ -1,0 +1,43 @@
+#include <stdio.h>
+
+int main()
+{
+	int w,l,t = 0;
+  while(scanf("%d %d",&w,&l)!=EOF){
+  	if(!t) t++;
+    else printf("\n");
+    
+  	int alpha = 'a', i = 0,s = 0;
+    char str[1000];
+    while(l!=0){
+    	int j = 0;
+    	while(s!=0) {
+    		if(l<=0) str[j++] = ' ';
+    		else {
+    			if(alpha>'z') alpha -= 26;
+    			str[j++] = alpha++;
+    		}
+    		i++,l--;
+    		
+    		if(!(i%w)){
+    			for(j = j-1; j>=0; j--) 
+    			  printf("%c",str[j]);
+    			s--,printf("\n");
+    		}
+    	}
+    	if(l<=0) break;
+    	if(alpha>'z') alpha -= 26;
+    	printf("%c",alpha++);
+    	i++,l--;
+    	if((i%w != 0 && l<=0)||(!(i%w) && !l)) printf("\n");
+    	if(!(i%w) && l>0) {
+    		s++;
+    		if(!(i%w)) printf("\n");
+    	}
+    	if(alpha>'z') alpha -= 26;
+
+    }
+  }
+}
+
+
