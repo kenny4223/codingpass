@@ -1,0 +1,18 @@
+#include <stdio.h>
+
+int main()
+{
+    int C, K, M, L;
+    while(scanf("%d%d%d%d", &C, &K, &M, &L)!=EOF){
+
+        int v[M] = {0}, i = 1,r;
+        v[L] = 1;
+        for(i=2; i<M+2; i++){
+        	L = (C* L + K);
+        	L %= M;
+        	if(!v[L]) v[L] = i;
+        	else break;
+        }
+        printf("%d\n", i-v[L]);
+    }
+}
