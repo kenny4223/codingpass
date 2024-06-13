@@ -1,0 +1,37 @@
+#include <stdio.h>
+
+int main()
+{
+	  
+	  unsigned n;
+	  while (scanf("%u", &n) != EOF) {
+	  	  int i = 0;
+        for(int b=1; n/b >= b/3; b++){
+        	if(!(n%b) && n/b <= b && 3*(n/b) >= b) {
+        		printf("Yes\n",b);
+        		i++;
+        		break;
+        	}
+        }
+    	  if(!i) printf("No\n");
+	  }
+
+}
+/*
+如果一整數 n 可以拆解成 n = a´b, (0 < a £ b) ，使得 3a ³ b 則此數為小的三倍
+比較大，簡稱小三比較大的數；請撰寫一程式判斷一數是否為小三比較大的數。
+輸入說明
+測資包含一行或數行整數0 < n < 232 ， EOF 結束測試。
+輸出說明
+輸入整數，若為小三比較大的數請輸出"Yes"，否則輸出"No"。
+範例輸入
+66
+26
+105
+188
+範例輸出
+Yes
+No
+Yes
+No
+*/
