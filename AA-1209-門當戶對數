@@ -1,0 +1,19 @@
+#include <stdio.h>
+
+int main()
+{
+	  
+	  unsigned n;
+	  while (scanf("%u", &n) != EOF) {
+	  	  int i = 0;
+        for(int b=1; 2*(n/b)>=b; b++){
+        	if(!(n%b) && n/b <= b && 3*(n/b) >= b) {
+        		printf("Yes\n",b);
+        		i++;
+        		break;
+        	}
+        }
+    	  if(!i) printf("No\n");
+	  }
+
+}
