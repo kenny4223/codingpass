@@ -1,0 +1,63 @@
+#include <iostream>
+
+int days[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
+void ifyear29(int y){
+  if (!(y % 400) || (!(y % 4) && y % 100 != 0)) {
+    days[1] = 29;
+  }
+  else days[1] = 28;
+}
+  
+void tatalday(int d,int m,int y,int n){
+	if(n>0) {
+		while(n--){
+		d++;
+		if(d > days[m-1]){
+		  	m++;
+		  	d = 1;
+		  	if(m > 12){
+		  		y++;
+		  		ifyear29(y);
+		  		m = 1;
+		  	}
+		  }
+		}
+	}
+	else if(n<0){
+		while(n!= 0){
+			d--;
+			n++;
+		  if(d == 0){
+			  m--;
+			  if(m < 1){
+			  	y--;
+			  	ifyear29(y);
+			  	m = 12;
+			  }
+			  d = days[m-1];
+		  }
+		}
+		
+	}
+	
+	if (d > days[m-1]) printf("Invalid date!\n");
+	else if (n == 0) printf("%04d-%02d-%02d\n",y,m,d);
+	else printf("%04d-%02d-%02d\n",y,m,d);
+}
+
+
+
+int main()
+{
+	int y,m,d,n;
+	while(scanf("%d-%d-%d%d",&y,&m,&d,&n) != EOF){
+	  ifyear29(y);
+	  if (d > days[m-1]) {
+		  printf("Invalid date!\n");
+		  continue;
+	  }
+    tatalday(d,m,y,n);
+	}
+  
+}
