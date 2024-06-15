@@ -1,0 +1,51 @@
+#include <stdio.h>
+
+typedef unsigned long long ULL;
+
+int getlen(ULL n) {  
+    int x = 0;
+    while(n) 
+      n /= 10,x++;
+    return x;
+}
+
+int tens(ULL n) {  
+    for(;n > 10; n/=10) 
+      if(n%10) return 0;
+    if(n == 10) return 1;
+    else return 0;
+}
+
+ULL cut_tailer(ULL n, int r) { 
+    while(r--)
+    	n /= 10;
+    return (n);
+} 
+
+ULL mirror(ULL n, int k) { 
+    ULL n1 = n;
+    if(k ? n1 /= 10 : n1);
+    while(n1){
+    	n = n*10+(n1%10);
+      n1 /= 10;
+    }
+    return n;
+    
+}
+
+int main()
+{
+    ULL n, head, n1;
+
+    while(scanf("%llu", &n)!=EOF){
+        int len = getlen(n);         
+        if (len == 1) n1 = n;
+        else if (tens(n)) n1 = n-1;  
+        else {
+        	  head = cut_tailer(n, len/2); 
+    	      n1 = mirror(head, len%2); 
+    	      if (n1 > n) n1 = mirror(head-1, len%2);
+        }
+        printf("%llu\n", n1);
+    }
+}
