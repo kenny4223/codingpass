@@ -1,0 +1,27 @@
+#include <iostream>
+#include <cstdio>
+
+using namespace std;
+
+int isBachelorNum(int n)
+{
+	  int dig[10]={0};
+	  while(n){
+	  	dig[n%10]++;
+	    n /= 10;
+	  }
+	  for(int i=0;i<10;i++) {
+	    if(dig[i]>=2) return 0;
+	  }
+	  return 1;
+}
+
+int main()
+{
+    int n;
+    while(cin >> n){
+        if(n<0) n=-n;
+        cout << (isBachelorNum(n) ? "Yes" : "No") << endl;
+    }
+    return 0;
+}
