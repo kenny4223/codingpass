@@ -1,0 +1,38 @@
+#include <iostream>
+
+using namespace std;
+
+void prt(int a[][100], int b[][100], int m, int n) {
+    
+    int s = 0;
+    for(int i=0; i<n; i++){
+    	for(int j=0; j<n; j++){
+    		int sum = 0;
+    		for(int k=0;k<m;k++)
+    			sum += a[i][k]*b[k][j];
+    		s++;
+    		printf("%d%c", sum, s%n == 0 ? '\n' : ' ');
+    		
+    	}
+    }
+}
+
+int A[100][100], B[100][100];
+
+int main()
+{
+    int m, n, first=1;
+    while(cin >> m >> n, m+n){
+        cout << (--first ? "\n" : "");
+        
+        for(int i=0; i<m; i++)
+            for(int j=0; j<n; j++) {
+                cin >> A[i][j];    
+                B[j][i] = A[i][j]; 
+            }
+            
+        prt(B, A, m, n);  
+        cout << endl;
+        prt(A, B, n, m);  
+    }
+}
