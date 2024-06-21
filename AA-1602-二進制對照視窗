@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main() {
+    cout << "Offset" << "                      Bytes                           " << "Characters" << endl;
+    char c;
+    cout << "------  -----------------------------------------------  ----------------" << endl;
+  
+    string s;
+    while (cin.get(c)) {
+        s += c;
+    }
+
+    int line = 0;
+
+    while (line < s.length()) {
+        string s2;
+
+        printf("%06X  ", line);
+
+        int i = 0;
+        for (; i < 16 && line < s.length(); i++, line++) {
+            char c = s[line];
+            s2 += isprint(c) ? c : '.';
+            printf("%02X ", static_cast<unsigned char>(c));
+        }
+
+        
+        while (i < 16) {
+            printf("   ");
+            i++;
+        }
+
+        cout << " " << s2 ;
+        cout << "\n";
+    }
+    
+
+}
