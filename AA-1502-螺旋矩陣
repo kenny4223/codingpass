@@ -1,0 +1,41 @@
+#include <iostream>
+#include <cstdio>
+
+using namespace std;
+int x[100][100];
+
+void prt(int n, int d) {  
+
+    for (int i=0; i<n; i++) 
+        for (int j=0; j<n; j++) x[i][j] = 0;  
+
+    int q = 0, m = 0;     
+    char step[2][4] = {{1,n,-1,-n},  
+                       {n,1,-n,-1}}; 
+    
+    for (int i=0; i < n*n; i++) {
+    	  int r = q/n, c = q%n;        
+    	  x[r][c] = i+1;
+    	  if(step[d-1][m] == 1&&(c==n-1 || x[r][c+1])) m = (m+1)%4;
+    	  if(step[d-1][m] == n&&(r==n-1 || x[r+1][c])) m = (m+1)%4;
+    	  if(step[d-1][m] == -1&&(c==0 || x[r][c-1])) m = (m+1)%4;
+    	  if(step[d-1][m] == -n&&(r==0 || x[r-1][c])) m = (m+1)%4;
+    	  q += step[d-1][m];
+    }
+    
+    for (int i=0; i<n; i++)
+    	  for (int j=0; j<n; j++)
+    	      printf("%5d%c", x[i][j], j<n-1 ? ' ': '\n');
+}
+
+int main()
+{
+    int T, N, D = 0;
+    cin >> T;
+    while (T--) {
+    	  if (D) printf("\n");
+    	  
+    	  cin >> N >> D;
+    	  prt(N, D);
+    }
+}
