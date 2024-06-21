@@ -1,0 +1,48 @@
+#include <iostream>
+
+using namespace std;
+int select[16];  // 最多 16 台冷氣
+
+void bits(int n, int k, int r) {
+	
+	  // 共 n 台冷氣，從第 r 台起，要開 k 台！
+	  
+	  // 遞迴基本條件：k = 0 台
+    if (k == 0) {
+    	  // 沒冷氣要開了，要先關掉後面幾台！
+    	  for(int i=0; i<r; i++){
+    	    printf("%d", select[i]);
+    	  }
+    	  for(int i=r; i<n; i++){
+    	    printf("0");
+    	  }
+    	  printf("\n");  
+    	  return;
+    	  // 這裡你寫程式
+	  }
+	  
+	  // 遞迴降階：第 r 台，可開，也可以不開！
+    if (r < n) {  // 位置 r: 0,1,...,n-1
+	  	  select[r] = 0;
+	  	  bits(n, k, r+1);
+	  	  select[r] = 1;
+	  	  bits(n, k-1, r+1);
+	  	  
+	  	  
+	  	  // 你寫程式
+	  }
+}
+
+int main()
+{
+    int n, k, first = 1;
+    while (cin>> n >> k) {
+        if (first) first = 0;
+        else cout << endl;
+        for(int i=0;i<15;i++){
+        	select[i] = 0;
+        }
+        bits(n, k, 0);
+    }
+    return 0;
+}
