@@ -1,0 +1,26 @@
+#include <iostream>
+
+using namespace std;
+int bb, cc;
+
+int Bonus(int b, int c)
+{
+	  
+    int r = b/bb + c/cc;  
+    if (r==0) return 0;
+    
+    return (r + Bonus(r + b%bb , r + c%cc));
+}
+
+int main()
+{
+    int a, total;
+    while (cin >> a >> bb >> cc) {
+    	
+        total = a + Bonus(a, a); 
+        cout << total << " " 
+             << total % bb << " " 
+             << total % cc << endl;
+    }
+    return 0;
+}
