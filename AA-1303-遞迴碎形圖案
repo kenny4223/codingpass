@@ -1,0 +1,40 @@
+#include <iostream>
+#include <cstdio>
+#include <cmath>
+
+using namespace std;
+
+void line(int n) {
+  for (int i=0; i<pow(2,n); i++)
+    cout << " *";
+  cout << endl;
+}
+void space(int k) {
+	for (; k; k--) cout << "  ";
+}
+
+void prt(int n, int k) {
+  if (n == 1) {
+    space(k); cout << " *\n";
+    space(k); cout << " * *\n";
+    space(k); cout << "   *\n";
+    return;
+  }	  
+  prt(n-1,k);
+  space(k);
+  line(n);
+  prt(n-1,k+pow(2,n-1));
+}
+
+int main()
+{
+  int n, first = 1;
+  while (cin >> n) {
+    if (first) first = 0;
+    else printf("\n");
+  
+    prt(n, 0);
+  }
+
+}
+
