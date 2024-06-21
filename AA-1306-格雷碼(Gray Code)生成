@@ -1,0 +1,35 @@
+#include <iostream>
+#include <cstdio>
+#include <cstring>
+
+using namespace std;
+
+char code[32];
+
+void genCode(int n, int val, int k) {
+    if (n==0) {
+        cout << code << endl;
+        return;
+    }
+
+    code[k] = val + '0';
+    code[k+1] = 0;
+    genCode(n-1,0,k+1);
+    
+    code[k] = 1-val + '0';
+    code[k+1] = 0;
+    genCode(n-1,1,k+1);
+   
+}
+
+int main()
+{
+    int n, first=1;
+    while(cin >> n){
+        if(first) first = 0;
+        else cout << endl;
+        
+        code[0]=0;
+        genCode(n, 0, 0);
+    }
+}
