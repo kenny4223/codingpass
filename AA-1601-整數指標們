@@ -1,0 +1,36 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int v[10000];
+int *w[10000];
+
+int main()
+{
+	int N, M;
+	
+	while(cin >> N >> M,N+M) {
+		
+		char point;
+		int n, m;
+		
+		memset(v,0,sizeof(v));
+		
+		for(int i = 0; i < N; i++) 
+			w[i] = &v[i];
+		
+		
+		while(M--) {
+			cin >> point >> n >> m;
+			if(point == 'A') *w[n] += m;
+			else if(point == 'P')	w[n] = w[m];
+			else if(point == 'S')	swap(*w[n], *w[m]);
+			else if(point == 'X') swap(w[n], w[m]);
+			
+		}
+		
+		for(int i = 0; i < N; i++) 
+				cout << *w[i] << (i == N-1? "\n" : " ");
+		
+	}
+	
+}
