@@ -1,0 +1,79 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+typedef struct{
+    double real;
+    double imag;
+} COMPLEX;
+
+COMPLEX add(COMPLEX a, COMPLEX b){
+	  COMPLEX r = {a.real + b.real, a.imag + b.imag};
+	  return r;
+}
+
+COMPLEX sub(COMPLEX a, COMPLEX b){
+	  COMPLEX r = {a.real - b.real, a.imag - b.imag};
+	  return r;
+}
+COMPLEX mult(COMPLEX a, COMPLEX b) {
+	COMPLEX r = {a.real * b.real - a.imag * b.imag,
+		           a.imag * b.real + a.real * b.imag
+	};
+	return r; 
+}
+COMPLEX div(COMPLEX a, COMPLEX b){
+	double d = b.real * b.real + b.imag * b.imag;
+	COMPLEX r = {
+		  (a.real * b.real + a.imag * b.imag) / d,
+	    (a.imag * b.real - a.real * b.imag) / d
+	};
+	return r;
+}
+
+int main(int argc, char *argv[]) {
+	double a;
+	double b;
+	char m;
+	
+	COMPLEX c;
+	
+	bool first = true;
+	while(true) {
+		 if(first) {
+	     if(!(cin >> a >> b)) {
+	     	  exit(0);
+	     }
+	      c = {a,b};
+	      cin.ignore();
+		 	  first = false;
+		 	  continue;
+		 }
+		 
+		 cin >> m;
+	   if(m == '^') {
+	      printf("%.5f%s%.5fi\n",c.real,(c.imag >= 0 ? "+" : ""),c.imag);
+	   	  string s;
+	   	  getline(cin,s);
+	   	  first = true;
+	   	  continue;
+	   }
+		 cin >> a >> b;
+		 COMPLEX d = {a,b};
+		 if(m == '+') {
+		 	  c = add(c,d);
+		 }
+		 if(m == '-') {
+		 	  c = sub(c,d);
+		 }
+		 if(m == '*') {
+		 	  c = mult(c,d);
+		 }
+		 if(m == '/') {
+		 	  c = div(c,d);
+		 }
+		 cin.ignore();
+	}
+	
+    // Put your code below
+    return 0;
+}
