@@ -1,0 +1,128 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+struct Paper {
+  char type;
+  double d[6];
+  int id;
+};
+struct Pos {
+	char color;
+  double x;
+  double y;
+  int id;
+};
+
+double sign(double ax,double ay,double bx,double by,double cx,double cy) {
+	return (ax - cx) * (by - cy) - (bx - cx) * (ay - cy);
+}
+
+int main(int argc, char * argv[]) {
+	int f = 0;
+	while(true) {
+	vector<Paper> v;
+	vector<Pos> v2;
+	
+	map<int,vector<int>> m;
+	
+	int id = 1;
+  while (true) {
+    char c;
+    if(!(cin >> c)) {
+    	 exit(0);
+    }
+    if(c == '*') {
+    	 break;
+    }
+    Paper p;
+    p.type = c;
+    p.id = id;
+    id++;
+    int i = 0;
+    if (c == 'r') {
+      i = 4;
+    }
+    if (c == 'c') {
+      i = 3;
+    }
+    if (c == 't') {
+      i = 6;
+    }
+    for (int j = 0; j < i; j++) {
+      cin >> p.d[j];
+    }
+    v.push_back(p);
+  }
+		if(f++) {
+			 cout <<"^^^\n";
+		}
+  id = 1;
+  while (true) {
+    char c;
+    cin >> c;
+    if(c == 'X') {
+    	 break;
+    }
+    Pos p;
+    p.color = c;
+    p.id = id;
+    id++;
+    cin >> p.x >> p.y;
+    v2.push_back(p);
+  }
+  
+  string s[] = {"red","green","blue"};
+  
+  for(Paper f : v) {
+    cout << "Figure " << f.id <<":\n";
+    bool hasPos = false;
+    int count[3] = {};
+  	for(Pos p : v2) {
+  		bool in = false;
+  	   if(f.type == 'r') {
+  	   	    in = in || (p.x > min(f.d[0],f.d[2]) && p.x < max(f.d[0],f.d[2]) && p.y > min(f.d[1],f.d[3]) && p.y < max(f.d[1],f.d[3]));
+  	   	   
+  	   } 
+  	   if(f.type == 'c') {
+  	   	   in = in || f.d[2] * f.d[2] > pow(f.d[1] - p.y,2) + pow(f.d[0] - p.x,2);
+  	   } 
+  	   if(f.type == 't') {
+  	   	   double d1 = sign(p.x,p.y,f.d[0],f.d[1],f.d[2],f.d[3]);
+  	   	   double d2 = sign(p.x,p.y,f.d[2],f.d[3],f.d[4],f.d[5]);
+  	   	   double d3 = sign(p.x,p.y,f.d[4],f.d[5],f.d[0],f.d[1]);
+  	   	   
+  	   	   in = in || !((d1 < 0 || (d2 < 0) || (d3 < 0)) && ((d1 >0 ) || (d2 >0) || (d3 > 0)));
+  	   } 
+  	   
+  	   	   if(in) {
+  	   	   	   hasPos = true;
+  	   	   	   count[p.color == 'R' ? 0 : (p.color == 'G' ? 1 : 2)]++;
+  	   	       
+  	   	       m[p.id].push_back(f.id);
+  	   	       
+  	   	   }
+    }
+    for(int i = 0;i<3;i++) {
+    	if(count[i])
+    	 cout << "contains "<<count[i] <<" "<<s[i]<<" dot" <<(count[i] > 1 ? "s":"") <<"\n";
+    }
+    if(!hasPos) {
+    	cout <<"does not contain any color dot\n";
+    }
+  }
+  cout <<"\n";
+  int i = 1;
+  for(Pos p : v2) {
+    bool b = false;
+  	cout << "Dot "<< p.id<<":\n";
+  	for(int j : m[i]) {
+  		 b = true;
+  		 cout <<"contained in Figure "<<j<<"\n";
+  	}
+  	i++;
+  	if(!b) {
+  		 cout <<"not contained in any figure\n";
+  	}
+  }
+}}
