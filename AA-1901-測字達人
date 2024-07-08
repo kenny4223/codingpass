@@ -1,0 +1,76 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+struct goal{
+  	  char word[21];
+  	  double p1;
+  	  double p2;
+  };
+  
+int main()
+{
+  long double p, pp, p1,p2,p3,p4;
+  int n;
+  goal g[10000];
+  char wordd[10000][50];
+  char all[10000];
+  while(cin >> p >> n){
+  	pp = 1 - p;
+  	int n1 = n, n2 = n;
+  	int i = 0,k = 0,h = 0;
+  	
+  	for(int ass=0;ass<n;ass++){
+  		
+  		  cin >> g[h].word >> g[h].p1
+            >> g[h].p2;
+
+       for(int j=0; j<strlen(g[h].word); j++)
+           wordd[ass][j] = g[h].word[j];   
+       
+       
+       
+        p1 = g[h].p1 * p;
+        p2 = g[h++].p2 * pp;
+        
+        
+        if(p1>p2)
+          all[ass] = 'o' ;
+        else if(p1<p2)
+          all[ass] = 'p' ;
+        else 
+          all[ass] = 'n';
+  	}
+  	char c[50];
+  	scanf("\n");
+    while(fgets(c,50,stdin)){
+    	for(int x=n2-1; x>=0; x--){
+    		  int z = 0;
+    		  if(strlen(c)-1 != strlen(wordd[x]))	continue;
+    		  for(int y=0; y<strlen(c)-1; y++){
+    		  	  if(wordd[x][y]==c[y])  continue;
+    		  	  else{
+    		  	  	 z = 1;
+    		  	  	 break;
+    		  	  }
+    		  }
+    		  if(!z){
+    		  	  if(all[x] == 'o'){
+    		  	      	cout << "optimism" << endl;
+    		  	        break;
+    		  	  }
+    		  	  else if(all[x] == 'p'){
+    		  	     cout << "pessimism" << endl;
+    		  	     break;
+    		  	  }
+    		  	  else if(all[x] == 'n'){
+    		  	     cout << "no way to judge" << endl;
+    		  	     break;
+    		  	  }
+    		  }
+    		  else  continue;
+    	}
+    	
+    }
+  }
+   
+}
