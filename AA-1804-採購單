@@ -1,0 +1,39 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+char line[1000*21+1];
+char *item[1000];
+
+int cmpfunc (const void * a, const void * b) { 
+	  
+  return ( strcmp(*(char**)a, *(char**)b) );
+
+}
+
+int main()
+{
+    int t, n;
+    scanf("%d\n", &t);
+    while (t--) {
+        gets(line);  
+
+        char *token = strtok(line, " ");  
+        for (n = 0; token; n++) {
+        	  item[n] = token;
+        	  token = strtok(NULL, " ");
+        }
+        qsort(item, n, sizeof(item[0]), cmpfunc);
+
+        char last[20] = {0};
+        cout << item[0];
+        for (int i=1; i<n; i++) {
+        	  if(strcmp(item[i], item[i-1]) == 0)
+        	      continue;
+        	  cout << " " << item[i];
+        }
+        cout << endl;
+    }
+    
+    return 0;
+}
