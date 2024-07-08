@@ -1,0 +1,24 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main()
+{
+	  char b[1000001];
+	  char a[102];
+	  int q;
+	  cin >> b;
+    cin >> q;
+    while(q--){
+    	  cin >> a;
+    	  char *p = a, *q = b, *first = NULL;
+    	  for(;*p && *q;){
+    	  	if(*p == *q++){
+    	  		p++;
+    	  		if(first == NULL) first = q;
+    	  	}
+    	  }
+    	  if(*p == 0) cout << "yes " << first-b << " " << q-b << endl;
+    	  else cout << "no" << endl;
+    }
+}
