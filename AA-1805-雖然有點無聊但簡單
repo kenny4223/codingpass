@@ -1,0 +1,35 @@
+#include <iostream>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+using namespace std;
+
+
+char a[1000000], b[1000];
+int acc[1000001];
+
+
+int main(int argc, char *argv[])
+{
+	
+  int f=1;
+  while(cin >> a){
+      if(f) f = 0;
+      else cout << endl;
+	    
+	    int m  = strlen(a), i, x;
+	    for(i = 0,acc[0]=0;i<m;i++) acc[i+1] = acc[i]+a[i];
+	    
+	    while(cin >> b){
+	    	if(strcmp(b,"^^^")==0) break;
+	    	int n =strlen(b),find = 0;
+	    	for(x=i=0;i<n;i++) x+=b[i];
+	    	
+	    	for(i=0;find==0&&i<=m-n;i++){
+	    		  if(acc[i+n]-acc[i] == x)
+	    		    if(strncmp(&a[i],b,n) == 0) find = 1;
+	    	}
+	    	cout <<(find?"yes":"no") << endl;
+	    }
+  }
+}
