@@ -1,0 +1,36 @@
+#include <stdio.h>
+#include <string.h> // strlen(s): 返回 s 的長度
+#include <ctype.h>  // ispunct(c): 測試 c 是不是標點符號？
+                    // tolower(c): 返回 c 的小寫
+
+int isReverse(char *p, char *q) {  // 判斷字串，頭尾相同？
+    while(p < q) {
+    	  while(isspace(*p) || ispunct(*p))
+    	    p++;
+    	  while(isspace(*q) || ispunct(*q))
+    	    q--;
+    	  
+    	  if(p >= q) {
+    	  	break;
+    	  }
+    	  //printf("%c %c\n",*p ,*q);
+    	  if(tolower(*p++) != tolower(*q--))
+    	    return 0;
+    }
+    return 1;
+}
+
+int main()
+{
+	  char s[10001];
+	  while (gets(s)) {  // 讀取一行到 s[] 裡面（跳行不會讀到）
+	  
+        char *p = s,              // p 指到頭 
+             *q = s+strlen(s)-1;  // q 指到尾
+             
+        printf("\"%s\" is %sa palindrome.\n", 
+                s, isReverse(p, q) ? "": "not ");
+	  }
+
+    return 0;
+}
