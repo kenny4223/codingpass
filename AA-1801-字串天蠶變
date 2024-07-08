@@ -1,0 +1,61 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+
+string getAlpha(const string &s) {
+ 	string r;
+ 	for(char c : s) 
+ 	  if(isalpha(c)) 
+ 	    r += tolower(c);
+  return r;
+}
+string getNumbers(const string &s) {
+ 	string r;
+ 	for(char c : s) 
+ 	  if(isdigit(c)) 
+ 	    r += tolower(c);
+  return r;
+}
+
+string getChars(const string &s) {
+ 	string r;
+ 	for(char c : s) 
+ 	  if(isdigit(c) || isalpha(c)) 
+ 	    r += tolower(c);
+  return r;
+}
+int main(){
+	string s;
+ int f = 0;
+  while(getline(cin, s) ) {
+  	if(f++) {
+  		 cout <<"\n";
+  	}
+  	string plainString = getChars(s);
+  	string alp = getAlpha(s);
+  	string dig = getNumbers(s);
+  	string alpSorted = alp;
+  	string digSorted = dig;
+  	string alpSorted2 = alp;
+  	string digSorted2 = dig;
+  	sort(alpSorted.begin(),alpSorted.end());
+  	sort(digSorted.begin(),digSorted.end());
+  	sort(alpSorted2.begin(),alpSorted2.end(),greater<char>());
+  	sort(digSorted2.begin(),digSorted2.end(),greater<char>());
+  	
+  	cout << plainString <<"\n";
+  	cout << dig<< alp<<"\n";
+  	cout << alp<<dig <<"\n";
+  	cout << digSorted<<alpSorted <<"\n";
+  	cout << digSorted2 << alpSorted2<<"\n";
+  	cout << digSorted2<<alpSorted <<"\n";
+  	cout << digSorted<<alp <<"\n";
+  	cout << alpSorted<<dig <<"\n";
+  	
+  } 
+}
+
+
+
+
